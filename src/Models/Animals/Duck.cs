@@ -35,5 +35,9 @@ namespace Trestlebridge.Models.Animals
         {
             return _feathersProduced;
         }
+        public override string ToString()
+        {
+            return $"Duck {this._shortId}. Quernk!";
+        }
     }
 }
