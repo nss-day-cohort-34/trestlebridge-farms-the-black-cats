@@ -28,7 +28,6 @@ namespace Trestlebridge
             Farm Trestlebridge = new Farm();
             while (true)
             {
-                int count = 0;
                 DisplayBanner();
                 Console.WriteLine("1. Create Facility");
                 Console.WriteLine("2. Purchase Animals");
@@ -68,7 +67,6 @@ namespace Trestlebridge
                 {
                     Console.WriteLine($"Invalid option: {option}");
                 }
-                count++;
             }
         }
     }
