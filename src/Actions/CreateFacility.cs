@@ -3,17 +3,24 @@ using Trestlebridge.Interfaces;
 using Trestlebridge.Models;
 using Trestlebridge.Models.Facilities;
 
-namespace Trestlebridge.Actions {
-    public class CreateFacility {
-        public static void CollectInput (Farm farm) {
-            Console.WriteLine ("1. Grazing field");
-            Console.WriteLine ("2. Plowed field");
+namespace Trestlebridge.Actions
+{
+    public class CreateFacility
+    {
+        public static void CollectInput(Farm farm)
+        {
+            Console.WriteLine("1. Grazing field");
+            Console.WriteLine("2. Plowed field");
+            Console.WriteLine("3. Natural field");
+            Console.WriteLine("4. Chicken House");
+            Console.WriteLine("5. Duck House");
 
-            Console.WriteLine ();
-            Console.WriteLine ("Choose what you want to create");
 
-            Console.Write ("> ");
-            string input = Console.ReadLine ();
+            Console.WriteLine();
+            Console.WriteLine("Choose what you want to create");
+
+            Console.Write("> ");
+            string input = Console.ReadLine();
 
             switch (Int32.Parse(input))
             {
@@ -23,7 +30,17 @@ namespace Trestlebridge.Actions {
                     Console.Write("Press any key to continue");
                     Console.ReadLine();
                     break;
-                    case 2:
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    farm.AddChickenHouse(new ChickenHouse());
+                    Console.WriteLine("Chicken House Added!!!");
+                    Console.Write("Press any key to continue");
+                    Console.ReadLine();
+                    break;
+                case 5:
                     break;
                 default:
                     break;
