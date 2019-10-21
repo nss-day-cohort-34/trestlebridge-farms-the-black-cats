@@ -4,6 +4,6 @@ namespace Trestlebridge.Interfaces
     {
         int Rows { get; }
         int PlantsPerRow { get; set; }
-        void Harvest();
+        double Compost();
     }
 }
