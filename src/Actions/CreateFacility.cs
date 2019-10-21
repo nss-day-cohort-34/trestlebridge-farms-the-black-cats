@@ -1,5 +1,5 @@
 using System;
-using Trestlebridge.Interfaces;
+using Trestlebridge;
 using Trestlebridge.Models;
 using Trestlebridge.Models.Facilities;
 
@@ -21,41 +21,51 @@ namespace Trestlebridge.Actions
 
             Console.Write("> ");
             string input = Console.ReadLine();
-
-            switch (Int32.Parse(input))
+            try
             {
-                case 1:
-                    farm.AddGrazingField(new GrazingField());
-                    Console.WriteLine("Grazing Field Added!!!");
-                    Console.Write("Press any key to continue");
-                    Console.ReadLine();
-                    break;
-                case 2:
-                    farm.AddPlowedField(new PlowedField());
-                    Console.WriteLine("Plowed Field Added!!!");
-                    Console.Write("Press any key to continue");
-                    Console.ReadLine();
-                    break;
-                case 3:
-                    farm.AddNaturalField(new NaturalField());
-                    Console.WriteLine("Natural Field Added!!!");
-                    Console.Write("Press any key to continue");
-                    Console.ReadLine();
-                    break;
-                case 4:
-                    farm.AddChickenHouse(new ChickenHouse());
-                    Console.WriteLine("Chicken House Added!!!");
-                    Console.Write("Press any key to continue");
-                    Console.ReadLine();
-                    break;
-                case 5:
-                    farm.AddDuckHouse(new DuckHouse());
-                    Console.WriteLine("Duck House Added!!!");
-                    Console.Write("Press any key to continue");
-                    Console.ReadLine();
-                    break;
-                default:
-                    break;
+                switch (Int32.Parse(input))
+                {
+                    case 1:
+                        farm.AddGrazingField(new GrazingField());
+                        Console.WriteLine("Grazing Field Added!!!");
+                        Console.Write("Press any key to continue");
+                        Console.ReadLine();
+                        break;
+                    case 2:
+                        farm.AddPlowedField(new PlowedField());
+                        Console.WriteLine("Plowed Field Added!!!");
+                        Console.Write("Press any key to continue");
+                        Console.ReadLine();
+                        break;
+                    case 3:
+                        farm.AddNaturalField(new NaturalField());
+                        Console.WriteLine("Natural Field Added!!!");
+                        Console.Write("Press any key to continue");
+                        Console.ReadLine();
+                        break;
+                    case 4:
+                        farm.AddChickenHouse(new ChickenHouse());
+                        Console.WriteLine("Chicken House Added!!!");
+                        Console.Write("Press any key to continue");
+                        Console.ReadLine();
+                        break;
+                    case 5:
+                        farm.AddDuckHouse(new DuckHouse());
+                        Console.WriteLine("Duck House Added!!!");
+                        Console.Write("Press any key to continue");
+                        Console.ReadLine();
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (System.FormatException)
+            {
+                Console.WriteLine("Please enter one of the specified options...");
+                Console.WriteLine("Press return to continue... or stay here forever");
+                Console.ReadLine();
+                Program.DisplayBanner();
+                CollectInput(farm);
             }
         }
     }

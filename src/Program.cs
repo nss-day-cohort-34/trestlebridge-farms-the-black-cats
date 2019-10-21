@@ -7,7 +7,7 @@ namespace Trestlebridge
 {
     class Program
     {
-        static void DisplayBanner ()
+        public static void DisplayBanner()
         {
             Console.Clear();
             Console.WriteLine();
@@ -23,7 +23,7 @@ namespace Trestlebridge
         static void Main(string[] args)
         {
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
-			Console.BackgroundColor = ConsoleColor.Gray;
+            Console.BackgroundColor = ConsoleColor.Gray;
 
             Farm Trestlebridge = new Farm();
             while (true)
