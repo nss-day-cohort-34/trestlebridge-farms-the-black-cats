@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Trestlebridge.Interfaces;
 using Trestlebridge.Models;
@@ -17,7 +18,17 @@ namespace Trestlebridge.Actions
                 // Only display grazing fields that have room
                 if (farm.GrazingFields[i].Animals.Count < farm.GrazingFields[i].Capacity)
                 {
+                    Console.WriteLine("=================================================");
                     Console.WriteLine($"{i + 1}. Grazing Field. Current Animal Count: {farm.GrazingFields[i].Animals.Count}");
+
+                    // Group animals by their type to display their counts
+                    List<IGrouping<string, IGrazing>> groupedAnimals = farm.GrazingFields[i].Animals.GroupBy(anml => anml.Type).ToList();
+
+                    foreach (IGrouping<string, IGrazing> anml in groupedAnimals)
+                    {
+                        Console.WriteLine($"{anml.Key}: {anml.Count()}");
+                    }
+                    Console.WriteLine("=================================================");
                 }
             }
 
