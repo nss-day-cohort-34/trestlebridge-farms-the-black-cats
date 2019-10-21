@@ -5,6 +5,14 @@ namespace Trestlebridge.Models.Plants
 {
     public class Sunflower : IResource, ISeedProducing, INatural, IPlowing
     {
+        private Guid _id = Guid.NewGuid();
+        private string _shortId
+        {
+            get
+            {
+                return this._id.ToString().Substring(this._id.ToString().Length - 6);
+            }
+        }
         private int _seedsProducedPerRow = 650;
         private double _compostProducedPerRow = 21.6;
         public string Type { get; } = "Sunflower";
@@ -18,7 +26,8 @@ namespace Trestlebridge.Models.Plants
             return _compostProducedPerRow;
         }
 
-        public double Harvest () {
+        public double Harvest()
+        {
             return _seedsProducedPerRow;
         }
 
@@ -27,8 +36,9 @@ namespace Trestlebridge.Models.Plants
             throw new NotImplementedException();
         }
 
-        public override string ToString () {
-            return $"Sunflower. Prettyum!";
+        public override string ToString()
+        {
+            return $"Sunflower {_shortId}. Prettyum!";
         }
 
     }
