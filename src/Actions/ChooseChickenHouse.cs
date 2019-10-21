@@ -12,9 +12,9 @@ namespace Trestlebridge.Actions
         {
             Console.Clear();
 
-            if (farm.ChickenHouses.Count() == 0)
+            if (farm.ChickenHouses.Count() == 0 || farm.ChickenHouses.Where(field => field.Chickens.Count == field.Capacity).ToList().Count == farm.ChickenHouses.Count())
             {
-                Console.WriteLine("There are no chicken houses. Try creating one.");
+                Console.WriteLine("There are no available chicken houses. Try creating a new one.");
                 Console.WriteLine("Press return... or else");
                 Console.ReadLine();
 
@@ -68,11 +68,6 @@ namespace Trestlebridge.Actions
                     Console.ReadLine();
                     ChooseChickenHouse.CollectInput(farm, chicken);
                 }
-                /*
-                    Couldn't get this to work. Can you?
-                    Stretch goal. Only if the app is fully functional.
-                 */
-                // farm.PurchaseResource<IGrazing>(animal, choice);
             }
         }
     }
