@@ -33,6 +33,10 @@ namespace Trestlebridge.Actions
                 case 2:
                     break;
                 case 3:
+                    farm.AddNaturalField(new NaturalField());
+                    Console.WriteLine("Natural Field Added!!!");
+                    Console.Write("Press any key to continue");
+                    Console.ReadLine();
                     break;
                 case 4:
                     farm.AddChickenHouse(new ChickenHouse());
