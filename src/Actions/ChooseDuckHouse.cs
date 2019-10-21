@@ -14,7 +14,11 @@ namespace Trestlebridge.Actions
 
             for (int i = 0; i < farm.DuckHouses.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. Duck House. Current Duck Count: {farm.DuckHouses[i].Ducks.Count}");
+                // Only display duck houses that have room
+                if (farm.DuckHouses[i].Ducks.Count < farm.DuckHouses[i].Capacity)
+                {
+                    Console.WriteLine($"{i + 1}. Duck House. Current Duck Count: {farm.DuckHouses[i].Ducks.Count}");
+                }
             }
 
             Console.WriteLine();
@@ -30,7 +34,8 @@ namespace Trestlebridge.Actions
             {
                 farm.DuckHouses[choice - 1].AddResource(Duck);
             }
-            else if(farm.DuckHouses.Where(field => field.Ducks.Count < field.Capacity).ToList().Count > 0){
+            else if (farm.DuckHouses.Where(field => field.Ducks.Count < field.Capacity).ToList().Count > 0)
+            {
                 Console.Write("Facility is full. Please select another facility. Press any key to continue...");
                 Console.ReadLine();
                 ChooseDuckHouse.CollectInput(farm, Duck);

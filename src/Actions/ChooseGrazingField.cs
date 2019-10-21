@@ -14,7 +14,11 @@ namespace Trestlebridge.Actions
 
             for (int i = 0; i < farm.GrazingFields.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. Grazing Field. Current Animal Count: {farm.GrazingFields[i].Animals.Count}");
+                // Only display grazing fields that have room
+                if (farm.GrazingFields[i].Animals.Count < farm.GrazingFields[i].Capacity)
+                {
+                    Console.WriteLine($"{i + 1}. Grazing Field. Current Animal Count: {farm.GrazingFields[i].Animals.Count}");
+                }
             }
 
             Console.WriteLine();
@@ -30,7 +34,8 @@ namespace Trestlebridge.Actions
             {
                 farm.GrazingFields[choice - 1].AddResource(animal);
             }
-            else if(farm.GrazingFields.Where(field => field.Animals.Count < field.Capacity).ToList().Count > 0){
+            else if (farm.GrazingFields.Where(field => field.Animals.Count < field.Capacity).ToList().Count > 0)
+            {
                 Console.Write("Facility is full. Please select another facility. Press any key to continue...");
                 Console.ReadLine();
                 ChooseGrazingField.CollectInput(farm, animal);
