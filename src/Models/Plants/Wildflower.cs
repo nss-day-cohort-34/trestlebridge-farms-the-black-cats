@@ -5,7 +5,7 @@ namespace Trestlebridge.Models.Plants
 {
     public class Wildflower : IResource, INatural
     {
-        private int _compostProducedPerRow = 40;
+        private double _compostProducedPerRow = 30.3;
 
         public string Type { get; } = "Wildflower";
 

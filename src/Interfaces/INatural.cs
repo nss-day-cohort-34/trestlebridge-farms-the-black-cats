@@ -1,6 +1,6 @@
 namespace Trestlebridge.Interfaces
 {
-    public interface INatural
+    public interface INatural : IResource
     {
         int Rows { get; }
         int PlantsPerRow { get; set; }

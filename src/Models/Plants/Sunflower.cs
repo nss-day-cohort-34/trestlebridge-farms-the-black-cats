@@ -28,7 +28,7 @@ namespace Trestlebridge.Models.Plants
         }
 
         public override string ToString () {
-            return $"Sesame. Yum!";
+            return $"Sunflower. Prettyum!";
         }
 
     }

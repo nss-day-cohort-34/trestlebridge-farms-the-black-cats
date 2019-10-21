@@ -7,14 +7,29 @@ namespace Trestlebridge.Models.Facilities
 {
     public class PlowedField : IFacility<IPlowing>
     {
-        private List<IPlowing> _plowedFields { get; set; } = new List<IPlowing>();
-        public double Capacity { get; set; }
+        private List<IPlowing> _plants { get; set; } = new List<IPlowing>();
+        private double _capacity = 13;
         private Guid _id = Guid.NewGuid();
 
+        public double Capacity
+        {
+            get
+            {
+                return _capacity;
+            }
+        }
+
+        public List<IPlowing> Plants
+        {
+            get
+            {
+                return _plants;
+            }
+        }
 
         public void AddResource(IPlowing resource)
         {
-            _plowedFields.Add(resource);
+            _plants.Add(resource);
         }
 
         public void AddResource(List<IPlowing> resources)
@@ -26,8 +41,8 @@ namespace Trestlebridge.Models.Facilities
             StringBuilder output = new StringBuilder();
             string shortId = $"{this._id.ToString().Substring(this._id.ToString().Length - 6)}";
 
-            output.Append($"Plowed Field {shortId} has {this._plowedFields.Count} plants \n");
-            this._plowedFields.ForEach(a => output.Append($"   {a}\n"));
+            output.Append($"Plowed Field {shortId} has {this._plants.Count} plants \n");
+            this._plants.ForEach(a => output.Append($"   {a}\n"));
 
             return output.ToString();
         }

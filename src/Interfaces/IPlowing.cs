@@ -1,6 +1,6 @@
 namespace Trestlebridge.Interfaces
 {
-    public interface IPlowing
+    public interface IPlowing : IResource
     {
         int Rows { get; }
         int PlantsPerRow { get; set; }
