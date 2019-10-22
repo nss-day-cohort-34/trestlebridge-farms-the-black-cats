@@ -2,6 +2,7 @@
 using System.Linq;
 using Trestlebridge.Actions;
 using Trestlebridge.Models;
+using Trestlebridge.Models.Processors;
 
 namespace Trestlebridge
 {
@@ -32,8 +33,9 @@ namespace Trestlebridge
                 Console.WriteLine("1. Create Facility");
                 Console.WriteLine("2. Purchase Animals");
                 Console.WriteLine("3. Purchase Seeds");
-                Console.WriteLine("4. Display Farm Status");
-                Console.WriteLine("5. Exit");
+                Console.WriteLine("4. Process Resources");
+                Console.WriteLine("5. Display Farm Status");
+                Console.WriteLine("6. Exit");
                 Console.WriteLine();
 
                 Console.WriteLine("Choose a FARMS option");
@@ -58,12 +60,17 @@ namespace Trestlebridge
                 else if (option == "4")
                 {
                     DisplayBanner();
+                    ChooseMeatFacility.CollectInput(Trestlebridge, new MeatProcessor());
+                }
+                else if (option == "5")
+                {
+                    DisplayBanner();
                     Console.WriteLine(Trestlebridge);
                     Console.WriteLine("\n\n\n");
                     Console.WriteLine("Press return key to go back to main menu.");
                     Console.ReadLine();
                 }
-                else if (option == "5")
+                else if (option == "6")
                 {
                     Console.WriteLine("Today is a great day for farming");
                     break;
