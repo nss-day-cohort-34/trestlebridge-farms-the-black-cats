@@ -37,65 +37,13 @@ namespace Trestlebridge.Actions
                 if (numberOfChickens == 1)
                 {
                     meatProcessor.AddResource((IMeatProducing)farm.ChickenHouses[choice - 1].Chickens.First());
-                    farm.ChickenHouses[choice - 1].Chickens.RemoveRange(0, 1);
-                    Program.DisplayBanner();
-                    Console.WriteLine($"Successfully added {numberOfChickens} to the meat processor");
-                    Console.Write("Are you ready to process?(y/n)");
-                    string response = Console.ReadLine();
-                    if (response == "y")
-                    {
-                        double meatProduced = 0;
-                        foreach (IMeatProducing animal in meatProcessor.AnimalsToBeProcessed)
-                        {
-                            meatProduced += animal.Butcher();
-                        }
-                        Program.DisplayBanner();
-                        Console.WriteLine($"Meat Produced: {meatProduced}kg.");
-                        Console.WriteLine("Press return to continue...or else");
-                        Console.ReadLine();
-                    }
-                    else if (response == "n")
-                    {
-                        Program.DisplayBanner();
-                        ChooseMeatFacility.CollectInput(farm, meatProcessor);
-                    }
-                    else
-                    {
-                        Console.Write("You're a dingus. Try again.");
-                        response = Console.ReadLine();
-                    }
+                    ProcessAnimals(choice, meatProcessor, farm, numberOfChickens);
                 }
                 else
                 {
                     List<IChicken> chickensToProcess = farm.ChickenHouses[choice - 1].Chickens.Take(numberOfChickens).ToList();
                     meatProcessor.AddResource(chickensToProcess.Select(c => (IMeatProducing)c).ToList());
-                    farm.ChickenHouses[choice - 1].Chickens.RemoveRange(0, numberOfChickens);
-                    Program.DisplayBanner();
-                    Console.WriteLine($"Successfully added {numberOfChickens} to the meat processor");
-                    Console.Write("Are you ready to process?(y/n)");
-                    string response = Console.ReadLine();
-                    if (response == "y")
-                    {
-                        double meatProduced = 0;
-                        foreach (IMeatProducing animal in meatProcessor.AnimalsToBeProcessed)
-                        {
-                            meatProduced += animal.Butcher();
-                        }
-                        Program.DisplayBanner();
-                        Console.WriteLine($"Meat Produced: {meatProduced}kg.");
-                        Console.WriteLine("Press return to continue...or else");
-                        Console.ReadLine();
-                    }
-                    else if (response == "n")
-                    {
-                        Program.DisplayBanner();
-                        ChooseMeatFacility.CollectInput(farm, meatProcessor);
-                    }
-                    else
-                    {
-                        Console.Write("You're a dingus. Try again.");
-                        response = Console.ReadLine();
-                    }
+                    ProcessAnimals(choice, meatProcessor, farm, numberOfChickens);
                 }
             }
             else
@@ -108,6 +56,36 @@ namespace Trestlebridge.Actions
                 {
                     Console.WriteLine($"{anml.Key}: {anml.Count()}");
                 }
+            }
+        }
+        public static void ProcessAnimals(int choice, MeatProcessor meatProcessor, Farm farm, int numberOfChickens)
+        {
+            farm.ChickenHouses[choice - 1].Chickens.RemoveRange(0, numberOfChickens);
+            Program.DisplayBanner();
+            Console.WriteLine($"Successfully added {numberOfChickens} to the meat processor");
+            Console.Write("Are you ready to process?(y/n)");
+            string response = Console.ReadLine();
+            if (response == "y")
+            {
+                double meatProduced = 0;
+                foreach (IMeatProducing animal in meatProcessor.AnimalsToBeProcessed)
+                {
+                    meatProduced += animal.Butcher();
+                }
+                Program.DisplayBanner();
+                Console.WriteLine($"Meat Produced: {meatProduced}kg.");
+                Console.WriteLine("Press return to continue...or else");
+                Console.ReadLine();
+            }
+            else if (response == "n")
+            {
+                Program.DisplayBanner();
+                ChooseMeatFacility.CollectInput(farm, meatProcessor);
+            }
+            else
+            {
+                Console.Write("You're a dingus. Try again.");
+                response = Console.ReadLine();
             }
         }
     }
