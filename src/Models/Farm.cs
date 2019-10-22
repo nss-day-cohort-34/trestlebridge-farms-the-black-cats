@@ -47,6 +47,7 @@ namespace Trestlebridge.Models
             ChickenHouses.ForEach(ch => report.Append(ch));
             DuckHouses.ForEach(ch => report.Append(ch));
 
+
             return report.ToString();
         }
     }

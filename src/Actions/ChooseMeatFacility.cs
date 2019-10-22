@@ -49,6 +49,10 @@ namespace Trestlebridge.Actions
                         {
                             meatProduced += animal.Butcher();
                         }
+                        Program.DisplayBanner();
+                        Console.WriteLine($"Meat Produced: {meatProduced}kg.");
+                        Console.WriteLine("Press return to continue...or else");
+                        Console.ReadLine();
                     }
                     else if (response == "n")
                     {
@@ -77,6 +81,10 @@ namespace Trestlebridge.Actions
                         {
                             meatProduced += animal.Butcher();
                         }
+                        Program.DisplayBanner();
+                        Console.WriteLine($"Meat Produced: {meatProduced}kg.");
+                        Console.WriteLine("Press return to continue...or else");
+                        Console.ReadLine();
                     }
                     else if (response == "n")
                     {
