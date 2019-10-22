@@ -3,6 +3,8 @@ using System.Linq;
 using Trestlebridge.Actions;
 using Trestlebridge.Models;
 using Trestlebridge.Models.Processors;
+using Trestlebridge.Models.Facilities;
+using Trestlebridge.Models.Animals;
 
 namespace Trestlebridge
 {
@@ -25,8 +27,20 @@ namespace Trestlebridge
         {
             Console.ForegroundColor = ConsoleColor.DarkMagenta;
             Console.BackgroundColor = ConsoleColor.Gray;
-
+            
             Farm Trestlebridge = new Farm();
+
+            // Trestlebridge.ChickenHouses.Add(new ChickenHouse());
+
+            // Trestlebridge.ChickenHouses[0].AddResource(new Chicken());
+            // Trestlebridge.ChickenHouses[0].AddResource(new Chicken());
+            // Trestlebridge.ChickenHouses[0].AddResource(new Chicken());
+            // Trestlebridge.ChickenHouses[0].AddResource(new Chicken());
+            // Trestlebridge.ChickenHouses[0].AddResource(new Chicken());
+            // Trestlebridge.ChickenHouses[0].AddResource(new Chicken());
+            // Trestlebridge.ChickenHouses[0].AddResource(new Chicken());
+            // Trestlebridge.ChickenHouses[0].AddResource(new Chicken());
+            
             while (true)
             {
                 DisplayBanner();

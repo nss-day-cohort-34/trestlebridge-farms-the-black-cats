@@ -14,16 +14,16 @@ namespace Trestlebridge.Actions
             int counter = 1;
             for (int i = 0; i < farm.ChickenHouses.Count; i++)
             {
-                Console.WriteLine($"{counter}. Chicken House. Current Chicken Count: {farm.ChickenHouses[i].Chickens.Count}");
+                Console.WriteLine($"{counter}. Chicken House ({farm.ChickenHouses[i].Chickens.Count} Chickens)");
                 counter++;
             }
-            Console.WriteLine("====================");
+            Console.WriteLine("===================================");
             for (int i = 0; i < farm.GrazingFields.Count; i++)
             {
-                Console.WriteLine($"{counter}. Grazing Field. Current Animal Count: {farm.GrazingFields[i].Animals.Count}");
+                Console.WriteLine($"{counter}. Grazing Field ({farm.GrazingFields[i].Animals.Count} Animals)");
                 counter++;
             }
-            Console.Write("Which facility has the animals you would like to process from?");
+            Console.Write("Which facility has the animals you would like to process from? ");
             int choice = Int32.Parse(Console.ReadLine());
 
             Console.Clear();
@@ -32,38 +32,57 @@ namespace Trestlebridge.Actions
             if (choice <= farm.ChickenHouses.Count)
             {
 
-                Console.WriteLine($"How many chickens would you like to process?");
+                Console.WriteLine($"How many chickens would you like to process? ");
                 int numberOfChickens = Int32.Parse(Console.ReadLine());
                 if (numberOfChickens == 1)
                 {
                     meatProcessor.AddResource((IMeatProducing)farm.ChickenHouses[choice - 1].Chickens.First());
-                    ProcessAnimals(choice, meatProcessor, farm, numberOfChickens);
+                    farm.ChickenHouses[choice - 1].Chickens.RemoveRange(0, numberOfChickens);
+                    Program.DisplayBanner();
+                    Console.WriteLine($"Successfully added {numberOfChickens} to the meat processor");
+                    ProcessAnimals(meatProcessor, farm);
                 }
                 else
                 {
                     List<IChicken> chickensToProcess = farm.ChickenHouses[choice - 1].Chickens.Take(numberOfChickens).ToList();
                     meatProcessor.AddResource(chickensToProcess.Select(c => (IMeatProducing)c).ToList());
-                    ProcessAnimals(choice, meatProcessor, farm, numberOfChickens);
+                    farm.ChickenHouses[choice - 1].Chickens.RemoveRange(0, numberOfChickens);
+                    Program.DisplayBanner();
+                    Console.WriteLine($"Successfully added {numberOfChickens} to the meat processor");
+                    ProcessAnimals(meatProcessor, farm);
                 }
             }
             else
             {
+                int animalIndex = 1;
                 int index = choice - farm.ChickenHouses.Count() - 1;
                 // Group animals by their type to display their counts
                 List<IGrouping<string, IGrazing>> groupedAnimals = farm.GrazingFields[index].Animals.GroupBy(anml => anml.Type).ToList();
 
                 foreach (IGrouping<string, IGrazing> anml in groupedAnimals)
                 {
-                    Console.WriteLine($"{anml.Key}: {anml.Count()}");
+                    Console.WriteLine($"{animalIndex}. {anml.Key}: {anml.Count()}");
+                    animalIndex++;
                 }
+                Console.WriteLine("===================================");
+                Console.Write("Which resource should be processed? ");
+                int selection = Int32.Parse(Console.ReadLine());
+                Console.WriteLine($"You selected: {groupedAnimals[selection - 1].Key}. I hope you're happy...\nHow many do you want to murder? ");
+                int numberToMurder = Int32.Parse(Console.ReadLine());
+
+                foreach (IGrazing animal in groupedAnimals[selection - 1].Take(numberToMurder))
+                {
+                    meatProcessor.AddResource((IMeatProducing)animal);
+                    farm.GrazingFields[index].Animals.Remove(animal);
+                }
+                Program.DisplayBanner();
+                Console.WriteLine($"Successfully added {numberToMurder} to the meat processor");
+                ProcessAnimals(meatProcessor, farm);
             }
         }
-        public static void ProcessAnimals(int choice, MeatProcessor meatProcessor, Farm farm, int numberOfChickens)
+        public static void ProcessAnimals(MeatProcessor meatProcessor, Farm farm)
         {
-            farm.ChickenHouses[choice - 1].Chickens.RemoveRange(0, numberOfChickens);
-            Program.DisplayBanner();
-            Console.WriteLine($"Successfully added {numberOfChickens} to the meat processor");
-            Console.Write("Are you ready to process?(y/n)");
+            Console.Write("Are you ready to process?(y/n) ");
             string response = Console.ReadLine();
             if (response == "y")
             {
@@ -74,7 +93,7 @@ namespace Trestlebridge.Actions
                 }
                 Program.DisplayBanner();
                 Console.WriteLine($"Meat Produced: {meatProduced}kg.");
-                Console.WriteLine("Press return to continue...or else");
+                Console.WriteLine("Press return to continue...or else ");
                 Console.ReadLine();
             }
             else if (response == "n")
@@ -84,7 +103,7 @@ namespace Trestlebridge.Actions
             }
             else
             {
-                Console.Write("You're a dingus. Try again.");
+                Console.Write("You're a dingus. Try again. ");
                 response = Console.ReadLine();
             }
         }
