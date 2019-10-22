@@ -5,6 +5,14 @@ namespace Trestlebridge.Models.Plants
 {
     public class Sesame : IResource, ISeedProducing, IPlowing
     {
+        private Guid _id = Guid.NewGuid();
+        private string _shortId
+        {
+            get
+            {
+                return this._id.ToString().Substring(this._id.ToString().Length - 6);
+            }
+        }
         private int _seedsProduced = 520;
         public string Type { get; } = "Sesame";
 
@@ -22,7 +30,7 @@ namespace Trestlebridge.Models.Plants
         }
 
         public override string ToString () {
-            return $"Sesame. Yum!";
+            return $"Sesame {_shortId}. Yum!";
         }
     }
 }
